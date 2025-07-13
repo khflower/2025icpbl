@@ -7,24 +7,24 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/lucide-static@latest/font/lucide.css" rel="stylesheet" />
     <style>
-        /* 추가적인 스타일링 */
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
         body {
-            font-family: 'Pretendard', sans-serif; /* 예시 폰트 */
+            font-family: 'Pretendard', sans-serif;
         }
         .tab-active {
-            background-color: #3b82f6; /* bg-blue-600 */
+            background-color: #3b82f6;
             color: white;
         }
         .week-btn-active {
-             background-color: #4f46e5; /* bg-indigo-600 */
+             background-color: #4f46e5;
              color: white;
+             transform: scale(1.05);
         }
     </style>
 </head>
 <body class="bg-slate-50">
 
-    <!-- Header -->
-    <header class="bg-white shadow-lg border-b">
+    <header class="bg-white shadow-sm border-b">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div class="flex items-center justify-between">
                 <div>
@@ -37,15 +37,13 @@
                 </div>
                 <div class="flex items-center space-x-2">
                     <i class="lucide-calendar h-6 w-6 text-blue-600"></i>
-                    <span class="text-sm text-gray-500">2025년 프로젝트</span>
+                    <span class="text-sm text-gray-500">2025년 1학기 프로젝트</span>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <!-- Tabs -->
         <div id="tabs-container" class="grid w-full grid-cols-3 mb-8 bg-gray-200 rounded-lg p-1">
             <button data-tab="timeline" class="tab-btn tab-active py-2 px-4 rounded-md flex items-center justify-center gap-2 transition">
                 <i class="lucide-clock h-4 w-4"></i> 주간 타임라인
@@ -58,76 +56,68 @@
             </button>
         </div>
 
-        <!-- Tab Content -->
         <div id="tab-content-container">
-            <!-- Timeline Content -->
             <div id="timeline" class="tab-content space-y-6">
                 <div id="weekly-buttons-container" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 mb-8">
-                    <!-- 주간 버튼이 여기에 동적으로 생성됩니다. -->
                 </div>
                 <div id="weekly-details-container">
-                    <!-- 주간 상세 내용이 여기에 동적으로 생성됩니다. -->
                 </div>
             </div>
 
-            <!-- Gantt Chart Content -->
             <div id="gantt" class="tab-content hidden">
-                <div class="shadow-lg rounded-lg bg-white">
+                <div class="shadow-lg rounded-lg bg-white overflow-hidden">
                     <div class="p-6">
                         <h2 class="text-2xl font-bold">간트 차트 (Gantt Chart)</h2>
                         <p class="text-gray-500">7주간 프로젝트 단계별 진행 일정</p>
                     </div>
                     <div class="p-6 overflow-x-auto">
                         <table id="gantt-chart-table" class="w-full border-collapse">
-                            <!-- 간트 차트가 여기에 동적으로 생성됩니다. -->
                         </table>
                     </div>
                 </div>
             </div>
 
-            <!-- Summary Content -->
             <div id="summary" class="tab-content hidden">
-                <div class="shadow-lg rounded-lg bg-white">
+                <div class="shadow-lg rounded-lg bg-white overflow-hidden">
                     <div class="p-6">
                         <h2 class="text-2xl font-bold">요약 회의록 (Key Meeting Minutes)</h2>
                         <p class="text-gray-500">프로젝트 진행 과정 핵심 요약</p>
                     </div>
                     <div id="summary-container" class="p-6 space-y-4">
-                        <!-- 요약 내용이 여기에 동적으로 생성됩니다. -->
                     </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Footer -->
     <footer class="bg-white border-t mt-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div class="text-center text-gray-500">
-                <p>DiscSIE 프로젝트 회의록 - 2025년 7주간 진행 과정</p>
+                <p>DiscSIE 프로젝트 회의록 - 한양대학교 인공지능대학원</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // 데이터
         const weeklyData = [
-            { week: 1, title: "프로젝트 착수 및 문제 정의", icon: "lucide-target", color: "bg-red-500", content: { meeting: "IC-PBL+ 프로젝트의 주제로 '로봇 지능' 분야, 특히 최근 LLM/VLM이 활발히 적용되는 로봇 계획(Robot Planning)을 다루어보자. 가장 영향력 있는 최신 연구를 분석하는 것부터 시작하자. SuSIE 논문을 분석해보니, 제로샷 일반화는 뛰어나지만 실제 로봇의 물리적, 시간적 제약을 전혀 고려하지 못한다. 이것을 우리 프로젝트의 핵심 문제로 정의하고 해결 방안을 모색해보자.", goal: "현실의 제약을 이해하는 지능형 AI 플래너 개발", todos: ["[강현] SuSIE 논문의 한계점(정적 계획, 문맥 부재, 비현실성) 심층 분석 및 정리", "[민재] 로봇 플래닝 분야 선행 연구 추가 리서치 (SuSIE 외 대안 모델)", "[공통] 프로젝트 최종 목표 설정: '현실의 제약을 이해하는 지능형 AI 플래너 개발'"] }},
-            { week: 2, title: "근본 원인 탐색: '상황 인지'의 부재", icon: "lucide-lightbulb", color: "bg-orange-500", content: { meeting: "SuSIE의 모든 문제는 결국 플래너가 '현재 상황'을 모르기 때문에 발생한다. 그렇다면 질문은 명확하다. 어떻게 하면 로봇에게 현재 상태의 핵심 의미(Semantic)를 효과적으로 전달할 수 있을까?", goal: "단순 픽셀 정보는 너무 방대하고 노이즈가 많다. '팔이 뻗어진 상태', '물체를 쥔 상태'와 같이 추상적이고 압축된 정보가 필요하다. 이 '의미 요약'이 우리 기술의 핵심이 될 것이다.", todos: ["[민재] 이미지에서 고수준 Semantic 정보를 추출하는 기술(Representation Learning) 리서치", "[강현] '상태 요약 정보'가 플래닝에 미치는 영향에 대한 가설 수립", "[공통] '의미 요약'을 위한 기술적 방향성(이산화, 군집화 등) 논의"] }},
-            { week: 3, title: "기술적 돌파구 발견: DisCo-Diff", icon: "lucide-cog", color: "bg-yellow-500", content: { meeting: "이미지 분포를 몇 개의 '이산 잠재 변수(Discrete Latent Variable)'로 압축하는 DisCo-Diff의 접근법이 우리가 찾던 '의미 요약'과 정확히 일치한다. 이 구조를 차용하면 해결의 실마리를 찾을 수 있겠다.", goal: "DisCo-Diff의 이산 잠재 변수는 이미지의 전역적인 모드를 포착하므로, 로봇의 전체적인 상태를 표현하는 데 매우 적합하다. 이것을 '상태 코드북(State Codebook)'으로 정의하고 활용하자.", todos: ["[강현] DisCo-Diff의 Encoder-Codebook-Decoder 구조 상세 분석", "[민재] DisCo-Diff의 이산 잠재 변수를 SuSIE 아키텍처에 통합하는 방안 모색", "[공통] 코드북 학습을 위한 시스템 아키텍처 초안 설계"] }},
-            { week: 4, title: "솔루션 융합 설계: DiscSIE v0.1", icon: "lucide-cog", color: "bg-green-500", content: { meeting: "SuSIE의 U-Net Cross-Attention에 텍스트뿐만 아니라, 우리가 만든 '상태 코드북' 임베딩을 함께 주입하는 것이 가장 효과적이겠다. '무엇을'과 '현재 어떤 상태에서'라는 두 정보를 동시에 고려하게 되는 것이다.", goal: "모델 전체를 재학습하는 것은 비현실적이니, LoRA 기법을 도입해 Cross-Attention 모듈만 효율적으로 튜닝하는 방안을 채택하자. 이는 기술의 실현 가능성을 크게 높여준다.", todos: ["[민재] 텍스트와 코드북 임베딩의 융합 방식(Concatenation)을 포함한 상세 아키텍처 설계", "[강현] LoRA 적용의 기술적 세부 사항 및 예상 효과 정리", "[공통] DiscSIE의 핵심 메커니즘(상황 인지, 정보 융합) 최종 확정"] }},
-            { week: 5, title: "솔루션 고도화: 동적 계획 메커니즘", icon: "lucide-cog", color: "bg-blue-500", content: { meeting: "이제 SuSIE의 또 다른 한계인 '정적 계획' 문제를 해결하자. '시간'이 아닌, '의미 있는 상태 변화'가 있을 때만 계획을 갱신해야 한다. 우리가 만든 코드북이 바로 그 상태 변화를 측정할 기준이 될 수 있다.", goal: "매 스텝마다 코드북 벡터 간의 코사인 유사도를 계산해 '의미론적 진행도(Semantic Progress)'를 측정하고, 이 값이 임계치를 넘을 때만 디퓨전 모델을 호출하여 다음 Subgoal을 생성하는 동적 계획 루프를 설계하자.", todos: ["[강현] 동적 계획 알고리즘의 순서도(Flowchart) 작성", "[민재] progress(t) 함수의 임계값 설정에 대한 논의 및 기준 정립", "[공통] '동적 계획' 메커니즘을 최종 솔루션에 통합"] }},
-            { week: 6, title: "평가 계획 및 논리 검증", icon: "lucide-bar-chart-2", color: "bg-teal-500", content: { meeting: "실제 실험이 어려운 상황에서, 우리의 아이디어를 어떻게 가장 설득력 있게 증명할 수 있을까? 표준 벤치마크(CALVIN)를 활용한 '예상 성능 평가'가 최선이다.", goal: "CALVIN 벤치마크에서 DiscSIE가 SuSIE 대비 연쇄 성공률을 기하급수적으로 향상시키는 이유를 '오류 누적 방지'와 '효율적 시간 배분'이라는 두 가지 근거로 명확히 설명하고, 이를 그래프로 시각화하자.", todos: ["[민재] CALVIN 및 실제 로봇 환경에서의 예상 성능 수치 추정 및 근거 작성", "[강현] 예상 성능을 보여주는 라인/막대 그래프 시각화 자료 제작", "[공통] 솔루션 평가(Evaluation) 섹션의 논리 구조 완성"] }},
-            { week: 7, title: "최종 보고서 및 향후 계획", icon: "lucide-check-circle", color: "bg-purple-500", content: { meeting: "지금까지의 과정을 종합하여 최종 보고서를 작성하자. 각 섹션의 내용이 유기적으로 연결되고, 우리의 고민과 해결 과정이 잘 드러나도록 다듬어야 한다.", goal: "프로젝트의 한계(2단계 학습, 최적 코드북 사이즈 등)를 명확히 인정하고, 이를 극복하기 위한 향후 연구 계획을 구체적으로 제시하여 프로젝트의 지속적인 발전 가능성을 보여주자.", todos: ["[강현/민재] 최종 보고서 전체 작성 및 상호 검토/피드백", "[공통] 최종 제출 준비"] }}
+            { week: 1, title: "프로젝트 착수 및 문제 정의", icon: "lucide-target", color: "bg-red-500", content: { meeting: "딥러닝 기초 강의에서 다룬 'robot manipulation task'를 프로젝트 주제로 선정. 최신 연구 SuSIE를 심층 분석하여 두 가지 핵심 한계점 파악함: (1) Subgoal 생성 시점이 고정되어 비효율적. (2) Low-level 정책이 diffusion policy이므로, 결국 high-level 계획의 성능 향상이 작업 성공의 Key임을 확인함.", goal: "현재 상태(current state) 정보를 함축적으로 활용하여, Subgoal을 동적으로 계획하는 플래너를 구현하는 것을 핵심 목표로 설정함.", todos: ["[민재] SuSIE 논문의 한계점(정적 계획, 문맥 부재, 비현실성) 심층 분석 및 정리", "[강현] 로봇 플래닝 분야 선행 연구 추가 리서치 (SuSIE 외 대안 모델)"] }},
+            { week: 2, title: "근본 원인 탐색: state에 대한 정보 부족", icon: "lucide-lightbulb", color: "bg-orange-500", content: { meeting: "SuSIE의 모든 문제는 결국 플래너가 로봇의 '현재 상태'를 추상적인 의미로 이해하지 못하기 때문이라고 결론 내림. Raw pixel 정보의 한계를 인식하고, action의 움직임과 같은 핵심 의미를 요약할 필요성을 느낌.", goal: "'현재 상태의 의미를 어떻게 효과적으로 요약할 것인가'를 다음 단계의 핵심 과제로 선정함.", todos: ["[민재] 이미지에서 고수준 Semantic 정보를 추출하는 기술(Representation Learning) 리서치", "[강현] '상태 요약 정보'가 플래닝에 미치는 영향에 대한 가설 수립", "[공통] '의미 요약'을 위한 기술적 방향성(이산화, 군집화 등) 논의"] }},
+            { week: 3, title: "해결방안 제시: DisCo-Diff", icon: "lucide-search", color: "bg-yellow-500", content: { meeting: "이미지 분포를 몇 개의 '이산 잠재 변수(Discrete Latent Variable)'로 압축하여 활용하는 DisCo-Diff 논문에서 결정적 힌트를 얻음. 이 구조를 로봇의 '코드북(Codebook)'으로 활용하는 아이디어를 착안함.", goal: "DisCo-Diff의 Encoder-Codebook 구조를 차용하여 로봇의 현재 상태를 요약하는 기술적 방향을 확정함.", todos: ["[민재] DisCo-Diff의 Encoder-Codebook-Decoder 구조 상세 분석", "[강현] DisCo-Diff의 이산 잠재 변수를 SuSIE 아키텍처에 통합하는 방안 모색", "[공통] 코드북 학습을 위한 시스템 아키텍처 초안 설계"] }},
+            { week: 4, title: "솔루션 융합 설계: DiscSIE", icon: "lucide-cog", color: "bg-green-500", content: { meeting: "SuSIE의 U-Net Cross-Attention 메커니즘에 텍스트와 '코드북' 임베딩을 함께 주입하여, '무엇을'과 '현재 어떤 상태에서'라는 두 정보를 동시에 고려하는 구조를 설계함. LoRA를 통한 효율적 학습 방안을 채택함.", goal: "정보 융합을 위한 상세 아키텍처와 LoRA 기반 학습 전략을 포함한 DiscSIE 설계를 완료함.", todos: ["[민재] 텍스트와 코드북 임베딩의 융합 방식(Concatenation)을 포함한 상세 아키텍처 설계", "[강현] LoRA 적용의 기술적 세부 사항 및 예상 효과 정리", "[공통] DiscSIE의 핵심 메커니즘(상황 인지, 정보 융합) 최종 확정"] }},
+            { week: 5, title: "솔루션 고도화: 동적 계획 메커니즘", icon: "lucide-zap", color: "bg-blue-500", content: { meeting: "SuSIE의 '정적 계획' 한계를 극복하기 위해, '시간'이 아닌 '의미 있는 상태 변화'를 기준으로 계획을 갱신하는 아이디어를 논의함.=> 작업진행도 반영 '코드북' 벡터 간의 코사인 유사도를 변화의 척도로 사용하기로 함.", goal: "'의미론적 작업 진행도(Semantic Progress)'가 특정 임계값을 넘을 때만 새로운 Subgoal을 생성하는 '동적 계획' 메커니즘을 최종 솔루션에 통합하기로 결정함.", todos: ["[민재] 동적 계획 알고리즘의 순서도(Flowchart) 작성", "[강현] progress(t) 함수의 임계값 설정에 대한 논의 및 기준 정립", "[공통] '동적 계획' 메커니즘을 최종 솔루션에 통합"] }},
+            { week: 6, title: "평가 계획 및 논리 검증", icon: "lucide-bar-chart-2", color: "bg-teal-500", content: { meeting: "정량적 평가는 진행. 반면, 실험 자원의 제약을 고려하여, 표준 벤치마크(CALVIN) 기반의 논리적인 '예상 성능 평가' 방안을 구체화함. SuSIE 대비 연쇄 성공률이 향상되는 근거를 명확히 하고, 이를 시각적으로 보여줄 그래프를 설계함.", goal: "정성적/정량적 평가 계획을 수립하고, 예상 성능의 논리적 근거(오류 누적 방지, 효율적 시간 배분)를 명확히 정의함.", todos: ["[민재] CALVIN 환경에서의 정량적 평가", "[강현] 예상 성능을 보여주는 라인/막대 그래프 시각화 자료 제작", "[공통] 솔루션 평가(Evaluation) 섹션의 논리 구조 완성"] }},
+            { week: 7, title: "최종 정리 및 향후 계획", icon: "lucide-check-circle", color: "bg-purple-500", content: { meeting: "지난 6주간의 과정을 체계적으로 정리하여 최종 보고서 작성. 프로젝트의 한계(2단계 학습 등)를 명확히 하고, 이를 보완할 향후 연구 방향을 논의함.", goal: "프로젝트의 독창성과 잠재력을 강조하며, 지속적인 발전 가능성을 제시하는 방향으로 최종 보고서와 발표를 마무리하기로 함.", todos: ["[공통] 최종 보고서 전체 작성 및 상호 검토/피드백", "[공통] 최종 제출 준비"] }}
         ];
+
         const ganttData = [
             { phase: "Phase 1: 문제 정의 및 분석", tasks: [{ name: "1.1. 프로젝트 목표 설정 및 방향성 논의", weeks: [true, false, false, false, false, false, false] }, { name: "1.2. 선행 연구(SuSIE) 심층 분석 및 한계점 도출", weeks: [true, true, false, false, false, false, false] }] },
-            { phase: "Phase 2: 핵심 기술 탐색 및 설계", tasks: [{ name: "2.1. '상황 인지' 문제 해결을 위한 기술 탐색", weeks: [false, true, false, false, false, false, false] }, { name: "2.2. DisCo-Diff 기반 '상태 코드북' 아이디어 착안", weeks: [false, false, true, false, false, false, false] }, { name: "2.3. DiscSIE v0.1 아키텍처 설계 (정보 융합, LoRA)", weeks: [false, false, false, true, false, false, false] }] },
-            { phase: "Phase 3: 솔루션 고도화 및 평가", tasks: [{ name: "3.1. '동적 계획' 메커니즘 도입 및 설계", weeks: [false, false, false, false, true, false, false] }, { name: "3.2. 예상 성능 평가 계획 수립 (CALVIN 벤치마크)", weeks: [false, false, false, false, false, true, false] }] },
+            { phase: "Phase 2: 핵심 기술 탐색 및 설계", tasks: [{ name: "2.1. '상황 인지' 문제 해결을 위한 기술 탐색", weeks: [false, true, false, false, false, false, false] }, { name: "2.2. DisCo-Diff 기반 '상태 코드북' 아이디어 착안", weeks: [false, false, true, false, false, false, false] }, { name: "2.3. DiscSIE 아키텍처 설계 (정보 융합, LoRA)", weeks: [false, false, false, true, false, false, false] }] },
+            { phase: "Phase 3: 솔루션 고도화 및 평가", tasks: [{ name: "3.1. '동적 계획' 메커니즘 도입 및 설계", weeks: [false, false, false, false, true, false, false] }, { name: "3.2. 정량평가 및 예상 성능 평가 계획 수립 (CALVIN 벤치마크)", weeks: [false, false, false, false, false, true, false] }] },
             { phase: "Phase 4: 최종 정리 및 보고", tasks: [{ name: "4.1. 최종 보고서 작성 및 시각 자료 제작", weeks: [false, false, false, false, false, true, true] }, { name: "4.2. 발표 준비 및 향후 연구 계획 수립", weeks: [false, false, false, false, false, false, true] }] }
         ];
+
         const summaryData = [
-            "1주차: SuSIE의 한계점('정적/비현실적 계획')을 발견하고, '상황을 이해하는 플래너 개발'을 목표로 설정.", "2주차: 문제의 근본 원인이 '추상적 상태 정보의 부재'임을 파악하고, '의미 요약'을 핵심 과제로 선정.", "3주차: DisCo-Diff의 '이산 잠재 변수' 아이디어를 발견하고, 이를 '상태 코드북'으로 활용하는 돌파구를 마련.", "4주차: SuSIE의 Cross-Attention에 '상태 코드북'을 융합하고 LoRA로 효율적 학습을 꾀하는 DiscSIE 아키텍처 설계.", "5주차: '상태 코드북'의 변화량을 기준으로 계획을 갱신하는 '동적 계획' 메커니즘을 도입하여 솔루션 고도화.", "6주차: 표준 벤치마크(CALVIN) 기반의 '예상 성능 평가' 계획을 수립하고, 논리적 근거와 시각화 방안을 구체화.", "7주차: 전체 과정을 종합한 최종 보고서를 작성하고, 프로젝트의 한계 및 향후 연구 계획을 수립하여 마무리."
+            "SuSIE의 '정적/비현실적 계획' 한계를 발견하고 '현재 상태를 의미적으로 파악할 수 있는 플래너' 개발을 목표로 설정함.", "문제의 근본 원인이 '추상적 상태 정보의 부재'임을 파악하고, '함축적 정보 제공'을 핵심 과제로 선정함.", "DisCo-Diff의 '이산 잠재 변수' 아이디어를 발견하여, 이를 '상태 코드북'으로 활용하는 방안을 사용함.", "SuSIE의 Cross-Attention에 '코드북'을 융합하고 LoRA로 효율적 학습을 꾀하는 DiscSIE 아키텍처를 설계함.", "'코드북'의 변화량을 기준으로 계획을 갱신하는 '동적 계획' 메커니즘을 도입하여 솔루션을 고도화함.", "표준 벤치마크(CALVIN) 기반의 정량적 평가를 진행하고, 논리적 근거와 시각화 방안을 구체화하여 '예상 성능 평가' 계획을 수립함.", "전체 과정을 종합하여 최종 보고서를 작성하고, 프로젝트의 한계 및 향후 연구 계획을 수립하며 마무리함."
         ];
 
         let activeWeek = 1;
@@ -139,12 +129,11 @@
         const tabsContainer = document.getElementById('tabs-container');
         const tabContents = document.querySelectorAll('.tab-content');
 
-        // 주간 버튼 렌더링 함수
         function renderWeeklyButtons() {
             weeklyButtonsContainer.innerHTML = '';
             weeklyData.forEach(week => {
                 const button = document.createElement('button');
-                button.className = `week-btn border rounded-lg p-3 flex flex-col items-center justify-start gap-2 text-center transition ${activeWeek === week.week ? 'week-btn-active' : 'bg-white'}`;
+                button.className = `week-btn border rounded-lg p-3 flex flex-col items-center justify-start gap-2 text-center transition-transform duration-200 ${activeWeek === week.week ? 'week-btn-active' : 'bg-white hover:shadow-md'}`;
                 button.dataset.week = week.week;
                 button.innerHTML = `
                     <div class="p-2 rounded-full ${week.color} text-white mb-1">
@@ -164,21 +153,18 @@
             });
         }
 
-        // 주간 상세 내용 렌더링 함수
         function renderWeeklyDetails() {
             const weekData = weeklyData.find(w => w.week === activeWeek);
             if (!weekData) return;
-
             const todosHtml = weekData.content.todos.map(todo => `
                 <div class="flex items-start gap-3 p-3 bg-white rounded-lg border">
-                    <span class="mt-0.5">✅</span>
+                    <span class="mt-1 text-green-500">✓</span>
                     <span class="text-gray-700">${todo}</span>
                 </div>
             `).join('');
-
             weeklyDetailsContainer.innerHTML = `
-                <div class="shadow-lg rounded-lg bg-white">
-                    <div class="p-6">
+                <div class="shadow-lg rounded-lg bg-white overflow-hidden">
+                    <div class="p-6 border-b">
                         <div class="flex items-center gap-3">
                             <div class="p-3 rounded-full ${weekData.color} text-white">
                                 <i class="${weekData.icon} h-6 w-6"></i>
@@ -189,17 +175,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="p-6 space-y-6">
+                    <div class="p-6 space-y-6 bg-gray-50">
                         <div>
-                            <h3 class="text-lg font-semibold mb-3 flex items-center gap-2"><i class="lucide-users h-5 w-5"></i> 회의 내용</h3>
-                            <div class="bg-slate-100 p-4 rounded-lg"><p class="text-gray-700 leading-relaxed">"${weekData.content.meeting}"</p></div>
+                            <h3 class="text-lg font-semibold mb-3 flex items-center gap-2"><i class="lucide-message-square h-5 w-5 text-gray-500"></i> 회의 내용</h3>
+                            <div class="bg-slate-100 p-4 rounded-lg"><p class="text-gray-700 leading-relaxed">${weekData.content.meeting}</p></div>
                         </div>
                         <div>
-                            <h3 class="text-lg font-semibold mb-3 flex items-center gap-2"><i class="lucide-target h-5 w-5"></i> 핵심 결정사항</h3>
-                            <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500"><p class="text-gray-700 leading-relaxed">"${weekData.content.goal}"</p></div>
+                            <h3 class="text-lg font-semibold mb-3 flex items-center gap-2"><i class="lucide-key-round h-5 w-5 text-gray-500"></i> 핵심 결정사항</h3>
+                            <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500"><p class="font-medium text-blue-800 leading-relaxed">${weekData.content.goal}</p></div>
                         </div>
                         <div>
-                            <h3 class="text-lg font-semibold mb-3 flex items-center gap-2"><i class="lucide-check-circle h-5 w-5"></i> To-Do List</h3>
+                            <h3 class="text-lg font-semibold mb-3 flex items-center gap-2"><i class="lucide-list-checks h-5 w-5 text-gray-500"></i> To-Do List</h3>
                             <div class="space-y-2">${todosHtml}</div>
                         </div>
                     </div>
@@ -207,11 +193,10 @@
             `;
         }
         
-        // 간트 차트 렌더링 함수
         function renderGanttChart() {
             let tableHtml = `
                 <thead>
-                    <tr class="border-b">
+                    <tr class="border-b bg-gray-50">
                         <th class="text-left p-4 font-semibold w-2/5">주요 활동 (Task)</th>
                         ${[...Array(7)].map((_, i) => `<th class="text-center p-4 font-semibold">${i + 1}주</th>`).join('')}
                     </tr>
@@ -226,7 +211,7 @@
                 `;
                 phaseData.tasks.forEach(task => {
                     tableHtml += `
-                        <tr class="border-b hover:bg-slate-50">
+                        <tr class="border-b hover:bg-slate-50 transition-colors">
                             <td class="p-3 pl-8 text-sm text-slate-600">${task.name}</td>
                             ${task.weeks.map(isActive => `
                                 <td class="text-center p-2">
@@ -241,34 +226,28 @@
             ganttTableContainer.innerHTML = tableHtml;
         }
 
-        // 요약 렌더링 함수
         function renderSummary() {
-            summaryContainer.innerHTML = `<h3 class="text-xl font-semibold mb-4">[7주간 프로젝트 핵심 진행 과정 요약]</h3>`;
+            let summaryHtml = `<h3 class="text-xl font-semibold mb-4">[7주간 프로젝트 핵심 진행 과정 요약]</h3>`;
             summaryData.forEach((item, index) => {
-                summaryContainer.innerHTML += `
-                    <div class="flex items-start gap-4 p-4 bg-slate-100 rounded-lg">
-                        <span class="mt-1 flex-shrink-0 border px-2 py-1 text-xs rounded-full bg-white">${index + 1}주차</span>
+                summaryHtml += `
+                    <div class="flex items-start gap-4 p-4 bg-slate-50 rounded-lg border border-slate-200 hover:shadow-sm transition-shadow">
+                        <span class="mt-1 flex-shrink-0 border px-2 py-0.5 text-xs rounded-full bg-white font-semibold text-slate-600">${index + 1}주차</span>
                         <p class="text-gray-700 leading-relaxed">${item}</p>
                     </div>
                 `;
             });
+            summaryContainer.innerHTML = summaryHtml;
         }
 
-        // 탭 전환 로직
         tabsContainer.addEventListener('click', (e) => {
             const targetButton = e.target.closest('.tab-btn');
             if (!targetButton) return;
-
-            // 모든 버튼과 컨텐츠에서 active 클래스 제거
             tabsContainer.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('tab-active'));
             tabContents.forEach(content => content.classList.add('hidden'));
-
-            // 클릭된 버튼과 컨텐츠에 active 클래스 추가
             targetButton.classList.add('tab-active');
             document.getElementById(targetButton.dataset.tab).classList.remove('hidden');
         });
 
-        // 초기 렌더링
         document.addEventListener('DOMContentLoaded', () => {
             renderWeeklyButtons();
             renderWeeklyDetails();
